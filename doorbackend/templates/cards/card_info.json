@@ -1,0 +1,4 @@
+{
+	'owner': {{card.owner}},
+	'revoked': '{{card.revoked}}'
+}

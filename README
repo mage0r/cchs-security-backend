@@ -1,0 +1,24 @@
+A backend for the NFC door access readers, currently written in Django. 
+
+How to use: 
+- Read the django tutorial for details about setting up your database connection
+  and activating the web administration interface.
+  This was developed against MySQL, but let me know if it doesn't work on 
+  the other database types
+- Login to the web administration interface, or if you prefer,
+  using the Django command line, or even your SQL server, and add
+  the cards for the system to the database.
+  The arguments are:
+  tag_uid: The 4-byte NFC tag ID[1], in lower case hex (i.e 1a23cd45)
+  owner: some text to designate the owner of the card, i.e email address
+  revoked (boolean): set to true if the card is lost or compromised,
+ 	and sharks with freakin' lasers should pop out if someone
+	attempts to use it.
+- Fire up your frontend and enjoy
+- All card actions (success, authentication failure, blocked card)
+  are logged to the cardevent table
+
+
+[1] - 7 byte UIDs are supported by the NFC protocol, and 
+	other card types (i.e DESFire) have even longer UIDs.
+	Be careful when creating database models around this.
