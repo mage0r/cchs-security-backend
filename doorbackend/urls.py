@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^cards/is_card_valid/(?P<card_uid>\w+)/$', 'cards.views.is_card_valid'),
     url(r'^cards/log_action/(?P<card_uid>\w+)/$','cards.views.log_card_action'),
+    url(r'^cards/add_card/(?P<card_uid>\w+)/$','cards.views.add_new_card'),
+    url(r'^cards/counter/(?P<card_uid>\w+)/$','cards.views.set_card_counter'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
