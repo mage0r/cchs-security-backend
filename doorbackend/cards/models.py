@@ -10,6 +10,9 @@ class Card(models.Model):
 	counter = models.PositiveIntegerField(default=0xffffffff)
 	revoked = models.BooleanField(default=True)
 
+	def __str__(self):
+		return self.tag_uid + " (owner " + str(self.owner) + " revoked: " + str(self.revoked) + ")"
+
 class CardEvent(models.Model):
 	tag_uid = models.CharField(max_length=16)
 	status = models.SmallIntegerField()
