@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from cards.models import Card,CardEvent
 from django.views.decorators.csrf import csrf_exempt
+from datetime import date
 
 import binascii 
 import base64
@@ -11,8 +12,14 @@ import base64
 def is_card_valid(request, card_uid):
 	print card_uid
 	card = get_object_or_404(Card,tag_uid=card_uid)
+
+	now_date = CardEvent.objects.filter(tag_uid=card_uid,time__gte=date.today()).order_by('-time')
+	isIn = 0 
+	if (len(now_date) >= 1 and now_date[0].status == 0):
+		isIn = 1
+	print now_date
 	if (card.revoked == False and card.owner > 0):
-		return render_to_response("cards/valid_card.txt",{'card':card})
+		return render_to_response("cards/valid_card.txt",{'card':card,'isIn':isIn})
 	else:
 		response = HttpResponse()
 		response.status_code = 403 # TODO: raise an audit log

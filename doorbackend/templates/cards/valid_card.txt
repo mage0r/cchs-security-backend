@@ -1,1 +1,1 @@
-{{card.keyA}},{{card.counter}}
+{{card.keyA}},{{card.counter}},{{isIn}}
