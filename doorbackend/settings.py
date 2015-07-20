@@ -3,6 +3,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -12,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'doorbackend',                      # Or path to database file if using sqlite3.
+        'NAME': 'door_system',                      # Or path to database file if using sqlite3.
         'USER': 'doorbackend',                      # Not used with sqlite3.
         'PASSWORD': 'doorbackend',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -100,27 +104,29 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'doorbackend.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
- "/Users/matt/code/nfc/hack-melbourne/security/backend/doorbackend/templates/"
+    "/srv/django/dooraccess/doorbackend/templates/",
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'cards'
+    'cards',
+    'user_extras',
+    'machines',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -135,7 +141,12 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+	'file': {
+		'level': 'INFO',
+		'class': 'logging.FileHandler',
+		'filename': '/var/log/doorbackend/django.event.log',
+	}
     },
     'loggers': {
         'django.request': {
@@ -143,5 +154,9 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+	'machine.events': {
+		'handlers': ['file'],
+		'level': 'INFO',
+	},
     }
 }

@@ -1,0 +1,10 @@
+{
+	"machine": {
+		"name": "{{machine_name}}",
+		"card": "{{card}}",
+		"firstname": "{{firstName}}",
+		"lastname": "{{lastName}}",
+		"level": "{{level}}",
+		"levelName": "{{levelName}}",
+	}
+}

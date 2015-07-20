@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -15,6 +15,12 @@ urlpatterns = patterns('',
     url(r'^cards/log_action/(?P<card_uid>\w+)/$','cards.views.log_card_action'),
     url(r'^cards/add_card/(?P<card_uid>\w+)/$','cards.views.add_new_card'),
     url(r'^cards/counter/(?P<card_uid>\w+)/$','cards.views.set_card_counter'),
+    
+    # machine access
+    url(r'^machines/is_card_valid/(?P<machine_name>\w+)/(?P<card_uid>\w+)/$', 'machines.views.is_card_valid'),
+
+    url(r'^machines/log_event/','machines.views.log_event'),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -1,0 +1,1 @@
+{{machine_name}},{{card}},{{firstName}},{{lastName}},{{level}},{{levelName}}
